@@ -1,0 +1,11 @@
+# Node
+node_modules/
+
+# Tools / downloads
+.tools/
+
+# Logs
+*.log
+
+# Env
+.env
