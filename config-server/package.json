@@ -4,6 +4,7 @@
   "private": true,
   "type": "module",
   "description": "Config server for MongoDB documents.",
+  "author": ":Lil",
   "main": "server.js",
   "scripts": {
     "start": "node server.js"
