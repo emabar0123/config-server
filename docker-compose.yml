@@ -5,6 +5,7 @@ services:
     build: .
     ports:
       - "3000:3000"
+    image: config-server:1.0.0
     environment:
       MONGO_URL: "mongodb://admin:123@172.16.161.45:27017/?authSource=admin"
       MONGO_DB: "serpents-config"
