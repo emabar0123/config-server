@@ -41,6 +41,37 @@ app.get("/configurations/by-name/:name", async (req, res) => {
   }
 });
 
+app.get("/configurations/by-name/:name/:field", async (req, res) => {
+  try {
+    const collection = await getCollection();
+    const doc = await collection.findOne({
+      configuration_name: req.params.name,
+    });
+
+    if (!doc) {
+      return res.status(404).json({ error: "Configuration not found" });
+    }
+
+    const field = req.params.field;
+    if (!Object.prototype.hasOwnProperty.call(doc, field)) {
+      return res.status(404).json({ error: "Field not found" });
+    }
+
+    const value = doc[field];
+    if (value === null || value === undefined) {
+      return res.status(404).json({ error: "Field not found" });
+    }
+
+    if (typeof value === "object") {
+      return res.json(value);
+    }
+
+    return res.send(String(value));
+  } catch (err) {
+    return res.status(500).json({ error: "Server error" });
+  }
+});
+
 app.listen(port, () => {
   console.log(`Config server listening on port ${port}`);
 });
